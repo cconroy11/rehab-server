@@ -7,7 +7,10 @@ exports.create = (req, res) => {
   Hospital.create({  
     name: req.body.name,
     phone_number: req.body.phone_number,
-    address: req.body.address
+    address: req.body.address,
+    city: req.body.city,
+    state: req.body.state,
+    zip: req.body.zip,
   }).then(hospital => {    
     // Send created Hospital to client
     res.send(hospital);
@@ -39,7 +42,7 @@ exports.findById = (req, res) => {
 exports.update = (req, res) => {
   var hospital = req.body;
   const id = req.params.hospitalId;
-  Hospital.update( { name: req.body.name, phone_number: req.body.phone_number, address: req.body.address }, 
+  Hospital.update( { name: req.body.name, phone_number: req.body.phone_number, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip }, 
     { where: {id: req.params.hospitalId} }
     ).then(() => {
       res.status(200).send(hospital);

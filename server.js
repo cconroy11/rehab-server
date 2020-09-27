@@ -21,6 +21,7 @@ const db = require("./app/models");
 const bcrypt = require("bcryptjs");
 const Role = db.role;
 const User = db.user;
+const UserRole = db.userRole;
 const Hospital = db.hospitals;
 
 
@@ -52,9 +53,17 @@ function initial() {
     password: bcrypt.hashSync("admin", 8)
   });
 
+  UserRole.create({
+    roleId: 1,
+    userId: 1,
+  });
+
   Hospital.create({
     name: "Hospital",
-    phone_number: "14075555555",
-    address: "123 Cherry Lane Orlando, FL 32836"
+    phone_number: "4075555555",
+    address: "123 Cherry Ln",
+    city: "Orlando",
+    state: "FL",
+    zip: 32836,
   });
 }

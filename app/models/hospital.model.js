@@ -9,6 +9,15 @@ module.exports = (sequelize, Sequelize) => {
     address: {
       type: Sequelize.STRING
     },
+    city: {
+      type: Sequelize.STRING
+    },
+    state: {
+      type: Sequelize.STRING
+    },
+    zip: {
+      type: Sequelize.BIGINT
+    },
   });
   
   return Hospital;
