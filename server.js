@@ -1,11 +1,19 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+//ENV
+const dotenv = require("dotenv");
+dotenv.config();
 
 const app = express();
 
+//Serve files on AWS
+if (process.env.NODE_ENV == "production" ) {
+  app.use(express.static('../rehab-challenge/dist'));
+}
+
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: process.env.SITE_URL 
 };
 
 app.use(cors(corsOptions));
@@ -34,11 +42,11 @@ db.sequelize.sync({force: true}).then(() => {
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 require('./app/routes/hospital.routes')(app);
+require('./app/routes/message.routes')(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+app.listen(process.env.PORT , () => {
+  console.log(`Server is running on port ${process.env.PORT}.`);
 });
 
 function initial() {  
