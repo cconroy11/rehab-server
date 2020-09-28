@@ -3,7 +3,7 @@ const config = require("../config/db.config.js");
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize(
   config.DB,
-  config.USER,
+  config.USR,
   config.PASSWORD,
   {
     host: config.HOST,
@@ -28,6 +28,7 @@ db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
 db.hospitals = require('../models/hospital.model.js')(sequelize, Sequelize);
 db.userRole = require('../models/userRole.model.js')(sequelize, Sequelize);
+db.message = require('../models/message.model.js')(sequelize, Sequelize);
 
 db.role.belongsToMany(db.user, {
   through: "user_roles",
@@ -40,6 +41,6 @@ db.user.belongsToMany(db.role, {
   otherKey: "roleId"
 });
 
-db.ROLES = ["user", "admin"];
+db.ROLES = ["admin"];
 
 module.exports = db;

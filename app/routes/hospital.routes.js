@@ -23,6 +23,12 @@ module.exports = function(app) {
     hospitals.findAll
   );
 
+  // Retrieve a single Hospital by Id
+  app.get(
+    '/api/hospital/:hospitalId', 
+    hospitals.findById
+  );
+
   // Update a Hospital with Id
   app.put(
     '/api/hospital/:hospitalId', 
